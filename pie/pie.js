@@ -17,12 +17,32 @@ function PieChart(selector, options) {
   this.options = Object.assign(defaultOptions, options);
   this.width = this.options.width;
   this.height = this.options.height;
-  canvas.setAttribute("width", this.width * 2);
-  canvas.setAttribute("height", this.height * 2);
-  canvas.style.width = this.width + 'px';
-  canvas.style.height = this.height +'px';
+
   this.context = canvas.getContext('2d')
-  this.context.scale(2,2);
+
+  var devicePixelRatio = window.devicePixelRatio || 1;
+  // 浏览器在渲染canvas之前存储画布信息的像素比 
+
+  var backingStoreRatio = this.context.webkitBackingStorePixelRatio ||
+
+    this.context.mozBackingStorePixelRatio ||
+
+    this.context.msBackingStorePixelRatio ||
+
+    this.context.oBackingStorePixelRatio ||
+
+    this.context.backingStorePixelRatio || 1;
+
+  // canvas的实际渲染倍率 
+  var ratio = devicePixelRatio / backingStoreRatio;
+
+  canvas.setAttribute("width", this.width * ratio);
+  canvas.setAttribute("height", this.height * ratio);
+  canvas.style.width = this.width + 'px';
+  canvas.style.height = this.height + 'px';
+
+  // 按比例增加图片的宽度、高度和位置。
+  this.context.scale(ratio, ratio);
 }
 
 PieChart.prototype.load = function (data) {
