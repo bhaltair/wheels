@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body style="margin: 0">
+  <h1>jdaslfaslk</h1>
+  <div>
+    <canvas class="pie-chart" ></canvas>
+  </div>
+  <script src="//cdn.bootcss.com/eruda/1.4.2/eruda.min.js" >
+  </script>
+  <script src="./pie.js" ></script>
+  <script type="text/javascript">
+    eruda.init()
+    const data = [{
+        title: '苹果',
+        value: 1024,
+        color: 'green'
+      },
+      {
+        title: '橘子',
+        value: 512,
+        color: 'orange'
+      },
+      {
+        title: '香蕉',
+        value: 256,
+        color: 'yellow'
+      },
+      {
+        title: '葡萄',
+        value: 980,
+        color: 'purple'
+      },
+    ];
+    let pie = new PieChart('.pie-chart', {
+      legend: true,
+      height: 200,
+      radius: 60
+    });
+    pie.load(data).render();
+  </script>
+</body>
+
+</html>
